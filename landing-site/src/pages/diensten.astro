@@ -1,0 +1,272 @@
+---
+import Header from "../components/Header.astro";
+import PageCta from "../components/PageCta.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Diensten van Stichting Bijbrengen: MeTherapy, Onderwijsarchitect en HeDude."
+    />
+    <meta name="viewport" content="width=device-width" />
+    <title>Diensten - Stichting Bijbrengen</title>
+    <script is:inline data-goatcounter="https://bijbrengen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <Header />
+
+      <PageCta
+        eyebrow="Diensten met missie"
+        title="Help jezelf en help Bijbrengen tegelijk"
+        primaryHref="mailto:info@bijbrengen.nl?subject=Vraag over diensten van Bijbrengen"
+        primaryLabel="Bespreek je vraag"
+        secondaryHref={`${base}projecten/`}
+        secondaryLabel="Bekijk projecten"
+      >
+        <p>
+          Schakel een dienst van Bijbrengen in voor begeleiding, onderwijsontwerp,
+          leermiddelen of technische ontwikkeling. Alles wat Bijbrengen met haar
+          diensten verdient, wordt ingezet om de maatschappelijke projecten verder
+          te ontwikkelen.
+        </p>
+      </PageCta>
+
+      <main class="main-content">
+        <section class="page-intro">
+          <div class="page-intro__inner">
+            <h1>Diensten</h1>
+            <p>
+              Naast maatschappelijke projecten biedt Bijbrengen diensten voor persoonlijke
+              begeleiding, onderwijsontwerp en technische innovatie. Deze diensten versterken
+              het werk van de stichting en maken de projecten praktisch uitvoerbaar.
+            </p>
+          </div>
+        </section>
+
+        <section id="metherapy" class="project-detail project-detail--featured">
+          <div class="project-detail__inner">
+            <div class="project-detail__copy">
+              <span class="badge">Zorg en begeleiding</span>
+              <h2>MeTherapy</h2>
+              <p>
+                MeTherapy richt zich op psychosociale therapie, hypnotherapie en persoonlijke
+                begeleiding. De aanpak vertrekt vanuit eigen herstelkracht, bewustwording en
+                het doorbreken van patronen die groei in de weg staan.
+              </p>
+              <p>
+                Binnen Bijbrengen sluit MeTherapy aan op dezelfde brede visie: mensen leren
+                zichzelf en hun omgeving beter begrijpen, zodat ze meer regie kunnen nemen.
+              </p>
+              <div class="project-detail__actions">
+                <a href="https://www.metherapy.nl/" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
+                  Naar MeTherapy.nl
+                </a>
+              </div>
+            </div>
+            <div class="project-detail__media">
+              <div class="media-placeholder">
+                <img src={`${base}media/photos/metherapy.webp`} alt="MeTherapy" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="onderwijsarchitect" class="project-detail">
+          <div class="project-detail__inner project-detail__inner--reverse">
+            <div class="project-detail__copy">
+              <span class="badge">Onderwijsontwerp</span>
+              <h2>Onderwijsarchitect</h2>
+              <p>
+                Onderwijsarchitect ondersteunt scholen, docenten en makers bij het ontwerpen
+                van leeromgevingen. De dienst helpt om persoonlijke talenten, curriculum,
+                ICT en ondernemend leren om te zetten naar werkbare onderwijsconcepten.
+              </p>
+              <p>
+                De methodiek sluit aan bij de rol van de docent als ontwerper en leercoach,
+                met technologie als hulpmiddel in plaats van doel op zichzelf.
+              </p>
+              <div class="project-detail__actions">
+                <a href="mailto:info@bijbrengen.nl" class="btn btn--primary">Inschakelen</a>
+                <a href={`${base}onderwijsarchitect/`} class="btn btn--secondary">Meer over Onderwijsarchitect</a>
+              </div>
+            </div>
+            <div class="project-detail__media">
+              <div class="media-placeholder media-placeholder--logo">
+                <img src={`${base}media/logos/onderwijsarchitect.svg`} alt="Onderwijsarchitect" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="leerbox" class="project-detail">
+          <div class="project-detail__inner project-detail__inner--reverse">
+            <div class="project-detail__copy">
+              <span class="badge">Leermiddelen</span>
+              <h2>Leerbox</h2>
+              <p>
+                Leerboxen zijn kant-en-klare pakketten voor ondernemend, spelend en ontdekkend leren.
+                Ze zijn direct inzetbaar in de klas of thuis en sluiten aan bij de Bijbrengen-visie
+                op persoonlijk en vrij leren.
+              </p>
+              <p>
+                Via de dienst HeDude worden naast de fysieke leerboxen ook digitale twins gebouwd:
+                interactieve, digitale versies van de leerboxen die zelfstandig of naast het fysieke
+                materiaal ingezet kunnen worden.
+              </p>
+              <p>
+                Op leerbox.nl vind je het volledige aanbod, inclusief thema's, inhoud en bestelinfo.
+              </p>
+              <div class="project-detail__actions">
+                <a href="https://www.leerbox.nl/" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
+                  Naar leerbox.nl
+                </a>
+              </div>
+            </div>
+            <div class="project-detail__media">
+              <div class="media-placeholder media-placeholder--logo">
+                <img src={`${base}media/logos/leerbox.svg`} alt="Leerbox" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="hedude" class="project-detail project-detail--last">
+          <div class="project-detail__inner">
+            <div class="project-detail__copy">
+              <span class="badge">AI en techniek</span>
+              <h2>HeDude</h2>
+              <p>
+                HeDude is de technische en AI-gerichte dienst rond gepersonaliseerd leren.
+                Het helpt bij het verkennen, ontwerpen en testen van digitale leerpaden,
+                AI-coaching en interactieve onderwijsconcepten.
+              </p>
+              <p>
+                Daarmee vormt HeDude de praktische ontwikkelkant van de leerpret-engine:
+                experimenteren, bouwen, meten en verbeteren vanuit de inhoud van Bijbrengen.
+              </p>
+              <div class="project-detail__actions">
+                <a href={`${base}hedude/`} class="btn btn--secondary">
+                  Bekijk HeDude
+                </a>
+              </div>
+            </div>
+            <div class="project-detail__media">
+              <div class="media-placeholder media-placeholder--logo">
+                <img src={`${base}media/photos/hedude_logo.jpg`} alt="HeDude" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="project-detail diensten-combo">
+          <div class="project-detail__inner">
+            <div class="project-detail__copy diensten-combo__copy">
+              <span class="badge">Gecombineerde inzet</span>
+              <h2>Diensten die elkaar versterken</h2>
+              <p>
+                In de praktijk van Bijbrengen worden diensten regelmatig gecombineerd ingezet.
+                Twee diensten samen leveren dan iets op dat geen van beide afzonderlijk zou kunnen bieden.
+              </p>
+
+              <div class="diensten-combo__cards">
+                <div class="diensten-combo__card">
+                  <p class="diensten-combo__label">Leerbox + HeDude</p>
+                  <h3>Digitale twins van leerboxen</h3>
+                  <p>
+                    De fysieke leerboxen van Leerbox worden door HeDude digitaal getwined: interactieve,
+                    digitale versies die zelfstandig of naast het fysieke materiaal ingezet worden en
+                    interferentievrije meting via de Leerpret-engine mogelijk maken.
+                  </p>
+                </div>
+                <div class="diensten-combo__card">
+                  <p class="diensten-combo__label">HeDude + Onderwijsarchitect</p>
+                  <h3>ICT-onderwijs van concept tot uitvoering</h3>
+                  <p>
+                    Technische expertise van HeDude gecombineerd met het onderwijsontwerp van
+                    Onderwijsarchitect levert volledige ICT-leertrajecten op. Twee voorbeelden
+                    waarbij Bijbrengen tijdelijk de opzet begeleidde zodat het initiatief
+                    zelfstandig verder kon:
+                  </p>
+                  <p>
+                    <strong>CodeGorilla</strong> leidt mensen met afstand tot de arbeidsmarkt op
+                    tot IT-professional. Inmiddels een landelijke sociale onderneming (PSO 30+)
+                    met 500+ succesvolle plaatsingen.
+                  </p>
+                  <p>
+                    <strong>Codeniacs</strong> maakt programmeeronderwijs toegankelijk voor
+                    basisschoolleerlingen via een eigen ELO en de methodiek van ondernemend leren.
+                    Uitgerold in Nederland en op Aruba.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  </body>
+</html>
+
+<style>
+  .diensten-combo {
+    background: #f0fdf4;
+    border-top: 2px solid rgb(22 101 52 / 0.15);
+  }
+
+  .diensten-combo__copy > p {
+    max-width: 42rem;
+    color: #475569;
+    line-height: 1.75;
+  }
+
+  .diensten-combo__cards {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.75rem;
+  }
+
+  .diensten-combo__card {
+    padding: 1.5rem;
+    border: 1px solid rgb(22 101 52 / 0.18);
+    border-radius: 0.75rem;
+    background: #ffffff;
+  }
+
+  .diensten-combo__label {
+    margin: 0 0 0.4rem;
+    color: var(--color-bijbrengen-forest);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .diensten-combo__card h3 {
+    margin: 0 0 0.75rem;
+    color: #111827;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .diensten-combo__card p:last-child {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.7;
+  }
+
+  @media (min-width: 720px) {
+    .diensten-combo__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

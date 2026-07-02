@@ -1,0 +1,132 @@
+---
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import PageCta from "../components/PageCta.astro";
+import SubsidyNotice from "../components/SubsidyNotice.astro";
+import Footer from "../components/Footer.astro";
+import { projectOverview, serviceOverview } from "../data/homepage.js";
+import "../styles/global.css";
+
+const base = import.meta.env.BASE_URL;
+---
+
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Stichting Bijbrengen verbindt zorg, coaching en onderwijs rond vrij en ondernemend leren. Ontdek onze initiatieven zoals Leerpretpark.nl." />
+    <meta name="viewport" content="width=device-width" />
+    <title>Bijbrengen - Samen leren, groeien en innoveren</title>
+    <script is:inline data-goatcounter="https://bijbrengen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <Header />
+
+      <PageCta
+        eyebrow="Nu bezig"
+        title="Doe mee aan ons leerarchetypen-onderzoek"
+        primaryHref="mailto:info@bijbrengen.nl?subject=Aanmelding archetypen vragenlijst"
+        primaryLabel="Aanmelden"
+        secondaryHref={`${base}leerpretpark/`}
+        secondaryLabel="Meer over Leerpretpark"
+      >
+            <p>
+              Leerpretpark bouwt een engine die leerpret meetbaar maakt. Daarvoor kalibreren we
+              leerarchetypen: de manier waarop jij je verhoudt tot uitdaging, resultaat en
+              onzekerheid in een leeromgeving. Je vult een reeks korte leercasussen in op een
+              paar dimensies — zo'n 15 minuten. Na aanmelding via
+              <a href="mailto:info@bijbrengen.nl?subject=Aanmelding archetypen vragenlijst">info@bijbrengen.nl</a>
+              ontvang je een persoonlijke link.
+            </p>
+      </PageCta>
+
+      <Hero />
+
+      <SubsidyNotice />
+      
+      <section class="overview-section" aria-labelledby="projecten-heading">
+        <div class="overview-section__inner">
+          <div class="overview-section__intro">
+            <span class="badge">Projecten</span>
+            <h2 id="projecten-heading">Projecten van Bijbrengen</h2>
+            <p>
+              Een compact overzicht van de initiatieven waarmee Stichting Bijbrengen leren, ondernemen, technologie en natuur met elkaar verbindt.
+            </p>
+          </div>
+          <ul class="overview-grid" role="list">
+            {projectOverview.map((project) => (
+              <li class="overview-card">
+                <a href={`${base}${project.href}`}>
+                  <div class="overview-card__media">
+                    {project.image && (
+                      <img
+                        src={`${base}${project.image}`}
+                        alt=""
+                        width="240"
+                        height="120"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    )}
+                  </div>
+                  {project.status && (
+                    <div style="margin-bottom: 0.5rem;">
+                      <span class={`badge ${project.status === 'active' ? 'badge--active' : 'badge--realized'}`} style="margin-bottom: 0; font-size: 0.65rem; padding: 0.15rem 0.55rem;">
+                        {project.statusLabel}
+                      </span>
+                    </div>
+                  )}
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section class="overview-section overview-section--muted" aria-labelledby="diensten-heading">
+        <div class="overview-section__inner">
+          <div class="overview-section__intro">
+            <span class="badge">Diensten</span>
+            <h2 id="diensten-heading">Diensten van Bijbrengen</h2>
+            <p>
+              Deze diensten ondersteunen mensen, scholen en makers bij persoonlijke groei, onderwijsontwerp en het slim inzetten van technologie.
+            </p>
+          </div>
+          <ul class="overview-grid" role="list">
+            {serviceOverview.map((service) => {
+              const isExternal = service.href.startsWith('http');
+              const href = isExternal ? service.href : `${base}${service.href}`;
+              return (
+                <li class="overview-card">
+                  <a href={href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined}>
+                    <div class="overview-card__media">
+                      {service.image ? (
+                      <img
+                        src={`${base}${service.image}`}
+                        alt=""
+                        width="240"
+                        height="120"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      ) : (
+                        <span>{service.title}</span>
+                      )}
+                    </div>
+                    <h3>{service.title}</h3>
+                    <p>{service.description}</p>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  </body>
+</html>
