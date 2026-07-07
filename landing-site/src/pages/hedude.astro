@@ -1,10 +1,16 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image, getImage } from "astro:assets";
 import Header from "../components/Header.astro";
 import PageCta from "../components/PageCta.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import hedudeBg from "../assets/hedude/hedude_bg.png";
 
 const base = import.meta.env.BASE_URL;
+
+const optimizedBg = await getImage({ src: hedudeBg, format: 'webp' });
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/hedude/*.{png,jpg,jpeg,svg}');
 
 const sourceLinks = [
   { label: "GitHub", href: "https://github.com/HeDude", icon: "github.svg" },
@@ -80,7 +86,7 @@ const modules = [
       </PageCta>
 
       <main class="main-content hedude-page">
-        <section class="hedude-hero" style={`--hedude-bg: url('${base}hedude/images/hedude_bg.png')`}>
+        <section class="hedude-hero" style={`--hedude-bg: url('${optimizedBg.src}')`}>
           <div class="hedude-hero__inner">
             <div class="hedude-hero__copy">
               <span class="badge">Dienst</span>
@@ -115,14 +121,22 @@ const modules = [
                 <li class={`hedude-module-card${!module.href ? ' hedude-module-card--disabled' : ''}`}>
                   <a href={module.href ?? undefined} target={module.href ? "_blank" : undefined} rel={module.href ? "noopener noreferrer" : undefined} aria-disabled={!module.href ? "true" : undefined} style={!module.href ? "pointer-events:none;opacity:0.45;cursor:default;" : ""}>
                     <figure>
-                      <img
-                        src={`${base}hedude/images/${module.image}`}
-                        alt=""
-                        width="900"
-                        height="900"
-                        loading="lazy"
-                        decoding="async"
-                      />
+                      {(() => {
+                        const imagePath = `../assets/hedude/${module.image}`;
+                        if (images[imagePath]) {
+                          return (
+                            <Image
+                              src={images[imagePath]()}
+                              alt=""
+                              width={900}
+                              height={900}
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          );
+                        }
+                        return null;
+                      })()}
                       <figcaption>{module.title}</figcaption>
                     </figure>
                     <div class="hedude-module-card__copy">
