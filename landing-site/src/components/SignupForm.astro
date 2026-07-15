@@ -22,6 +22,11 @@ const {
   thankYouPath,
   fallbackSubject = title
 } = Astro.props;
+
+// Sommige browsers (met name mobiele Safari, door blokkade van cookies van
+// andere domeinen) kunnen het Google Formulier soms niet in de iframe laden.
+// Bied daarom altijd ook een directe, niet-ingebedde link aan.
+const standaloneUrl = formUrl ? formUrl.replace(/[?&]embedded=true/, "") : formUrl;
 ---
 
 <section id={id} class="signup">
@@ -41,6 +46,11 @@ const {
         Laden…
       </iframe>
     </div>
+
+    <p class="signup__openlink">
+      Formulier laadt niet goed?
+      <a href={standaloneUrl} target="_blank" rel="noopener noreferrer">Open het in een nieuw tabblad →</a>
+    </p>
 
     <div class="signup__confirm">
       <p>Heb je het formulier verzonden?</p>
@@ -105,6 +115,18 @@ const {
     width: 100%;
     min-height: 45rem;
     border: 0;
+  }
+
+  .signup__openlink {
+    margin: 0.75rem 0 0;
+    color: #64748b;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .signup__openlink a {
+    color: var(--color-bijbrengen-forest);
+    font-weight: 600;
   }
 
   .signup__confirm {
