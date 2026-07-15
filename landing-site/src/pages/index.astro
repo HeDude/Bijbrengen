@@ -3,6 +3,8 @@ import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import PageCta from "../components/PageCta.astro";
 import SubsidyNotice from "../components/SubsidyNotice.astro";
+import NewsUpdates from "../components/NewsUpdates.astro";
+import SignupForm from "../components/SignupForm.astro";
 import Footer from "../components/Footer.astro";
 import { projectOverview, serviceOverview } from "../data/homepage.js";
 import "../styles/global.css";
@@ -26,7 +28,7 @@ const base = import.meta.env.BASE_URL;
       <PageCta
         eyebrow="Nu bezig"
         title="Doe mee aan ons leerarchetypen-onderzoek"
-        primaryHref="mailto:info@bijbrengen.nl?subject=Aanmelding archetypen vragenlijst"
+        primaryHref="#onderzoek-aanmelden"
         primaryLabel="Aanmelden"
         secondaryHref={`${base}leerpretpark/`}
         secondaryLabel="Meer over Leerpretpark"
@@ -35,16 +37,25 @@ const base = import.meta.env.BASE_URL;
               Leerpretpark bouwt een engine die leerpret meetbaar maakt. Daarvoor kalibreren we
               leerarchetypen: de manier waarop jij je verhoudt tot uitdaging, resultaat en
               onzekerheid in een leeromgeving. Je vult een reeks korte leercasussen in op een
-              paar dimensies — zo'n 15 minuten. Na aanmelding via
-              <a href="mailto:info@bijbrengen.nl?subject=Aanmelding archetypen vragenlijst">info@bijbrengen.nl</a>
-              ontvang je een persoonlijke link.
+              paar dimensies — zo'n 15 minuten. Vul het formulier hieronder in om mee te doen.
             </p>
       </PageCta>
 
       <Hero />
 
       <SubsidyNotice />
-      
+
+      <NewsUpdates />
+
+      <SignupForm
+        id="onderzoek-aanmelden"
+        eyebrow="Nu bezig"
+        title="Doe mee aan het leerarchetypen-onderzoek"
+        description="Je vult een reeks korte leercasussen in op een paar dimensies — zo'n 15 minuten. Na verzenden ontvang je verdere instructies."
+        formUrl="https://docs.google.com/forms/d/e/1FAIpQLSeK-dds_mTaI0BU2uDnRae8iycbkbDJEukZc98G9h3TTZZ0Og/viewform?embedded=true"
+        thankYouPath={`${base}leerarchetypen-onderzoek/bedankt/`}
+      />
+
       <section class="overview-section" aria-labelledby="projecten-heading">
         <div class="overview-section__inner">
           <div class="overview-section__intro">

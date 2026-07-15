@@ -1,0 +1,65 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/global.css";
+
+const base = import.meta.env.BASE_URL;
+
+// Deze pagina is de conversiepagina voor de Leerpretpark-aanmelding: stel hem
+// in als doel-URL voor een conversie in Google Ads / Google Analytics
+// (bezoek aan /leerpretpark/bedankt/ = een voltooide aanmelding).
+---
+
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Bedankt voor je aanmelding bij Leerpretpark." />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <title>Bedankt voor je aanmelding - Stichting Bijbrengen</title>
+    <script is:inline data-goatcounter="https://bijbrengen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <Header />
+
+      <main class="main-content">
+        <section class="page-intro">
+          <div class="page-intro__inner thankyou">
+            <span class="badge badge--active">Aanmelding ontvangen</span>
+            <h1>Bedankt voor je aanmelding!</h1>
+            <p>
+              We hebben je aanmelding voor Leerpretpark in goede orde ontvangen.
+              We nemen zo snel mogelijk contact met je op.
+            </p>
+            <div class="thankyou__actions">
+              <a href={`${base}leerpretpark/`} class="btn btn--primary">
+                Terug naar Leerpretpark
+              </a>
+              <a href={base} class="btn btn--secondary">
+                Naar de homepage
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  </body>
+</html>
+
+<style>
+  .thankyou {
+    text-align: center;
+  }
+
+  .thankyou__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>

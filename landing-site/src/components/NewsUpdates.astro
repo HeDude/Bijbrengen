@@ -1,0 +1,115 @@
+---
+const items = [
+  {
+    date: "27 maart 2026",
+    label: "Subsidie toegekend",
+    text: "Stichting Bijbrengen ontvangt cofinanciering van het Samenwerkingsverband Noord-Nederland (SNN) en het Europees Fonds voor Regionale Ontwikkeling van de Europese Unie voor de ontwikkeling van de leerpret-engine achter Leerpretpark.nl."
+  },
+  {
+    date: "15 juli 2026",
+    label: "Onderzoek loopt",
+    text: "Het leerarchetypen-onderzoek van Leerpretpark is gestart: meld je aan via info@bijbrengen.nl en ontvang een persoonlijke vragenlijst van circa 15 minuten."
+  }
+];
+---
+
+<section class="news" aria-labelledby="news-heading">
+  <div class="news__inner">
+    <div class="news__intro">
+      <span class="badge badge--active">Nieuws &amp; updates</span>
+      <h2 id="news-heading">Actueel bij Bijbrengen</h2>
+      <p>Korte, gedateerde updates over onze projecten, financiering en onderzoek.</p>
+    </div>
+    <ol class="news__list" role="list">
+      {items.map((item) => (
+        <li class="news__item">
+          <time class="news__date" datetime={item.date}>{item.date}</time>
+          <div class="news__body">
+            <span class="news__label">{item.label}</span>
+            <p>{item.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .news {
+    border-top: 1px solid #e5e7eb;
+    background: #fafaf7;
+  }
+
+  .news__inner {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 4rem 1.25rem;
+  }
+
+  .news__intro {
+    max-width: 42rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .news__intro h2 {
+    margin: 0;
+    color: #111827;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .news__intro p {
+    margin: 1rem 0 0;
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .news__list {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .news__item {
+    display: grid;
+    gap: 0.35rem 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    background: #ffffff;
+  }
+
+  .news__date {
+    color: var(--color-bijbrengen-forest);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .news__label {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: #111827;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  .news__body p {
+    margin: 0;
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  @media (min-width: 720px) {
+    .news__item {
+      grid-template-columns: 9rem 1fr;
+      align-items: start;
+    }
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import PageCta from "../components/PageCta.astro";
+import SignupForm from "../components/SignupForm.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
@@ -65,7 +66,7 @@ const artikelen = [
       <PageCta
         eyebrow="Vrijwilligers en stagiaires gezocht"
         title="Zet je expertise in voor het Leerpretpark"
-        primaryHref="mailto:info@bijbrengen.nl?subject=Meedoen met Leerpretpark"
+        primaryHref="#aanmelden"
         primaryLabel="Meld je aan"
         secondaryHref="https://www.leerpretpark.nl/"
         secondaryLabel="Naar leerpretpark.nl"
@@ -241,13 +242,26 @@ const artikelen = [
             <p>
               Leerpretpark werkt samen met scholen, makers, onderzoekers en ondernemers.
               Bezoek leerpretpark.nl voor actuele informatie, het volledige artikelenaanbod
-              en contactmogelijkheden.
+              en contactmogelijkheden, of meld je hieronder direct aan.
             </p>
-            <a href="https://www.leerpretpark.nl/" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
-              Naar leerpretpark.nl →
-            </a>
+            <div class="lpp-hero__actions" style="justify-content: center;">
+              <a href="#aanmelden" class="btn btn--primary">
+                Meld je aan
+              </a>
+              <a href="https://www.leerpretpark.nl/" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">
+                Naar leerpretpark.nl →
+              </a>
+            </div>
           </div>
         </section>
+
+        <SignupForm
+          eyebrow="Aanmelden"
+          title="Meld je aan voor Leerpretpark"
+          description="Als school, ouder, onderzoeker, zorgprofessional, ondernemer of vrijwilliger: vul het formulier hieronder in en we nemen contact met je op."
+          formUrl="https://docs.google.com/forms/d/e/1FAIpQLScg-CveZiqcYZr-XRIJS5A95bpwd03_VJ51KCePc_rNUur2BQ/viewform?embedded=true"
+          thankYouPath={`${base}leerpretpark/bedankt/`}
+        />
 
       </main>
 

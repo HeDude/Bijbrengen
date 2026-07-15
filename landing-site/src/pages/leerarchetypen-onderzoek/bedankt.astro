@@ -1,0 +1,65 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/global.css";
+
+const base = import.meta.env.BASE_URL;
+
+// Conversiepagina voor het leerarchetypen-onderzoek: stel deze URL in als
+// doel voor een conversie in Google Ads / Google Analytics
+// (bezoek aan /leerarchetypen-onderzoek/bedankt/ = een voltooide aanmelding).
+---
+
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Bedankt voor je aanmelding voor het leerarchetypen-onderzoek." />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="noindex" />
+    <title>Bedankt voor je aanmelding - Stichting Bijbrengen</title>
+    <script is:inline data-goatcounter="https://bijbrengen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <Header />
+
+      <main class="main-content">
+        <section class="page-intro">
+          <div class="page-intro__inner thankyou">
+            <span class="badge badge--active">Aanmelding ontvangen</span>
+            <h1>Bedankt voor je aanmelding!</h1>
+            <p>
+              We hebben je aanmelding voor het leerarchetypen-onderzoek in goede orde ontvangen.
+              Je hoort van ons zodra je persoonlijke vragenlijst klaarstaat.
+            </p>
+            <div class="thankyou__actions">
+              <a href={base} class="btn btn--primary">
+                Naar de homepage
+              </a>
+              <a href={`${base}leerpretpark/`} class="btn btn--secondary">
+                Meer over Leerpretpark
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  </body>
+</html>
+
+<style>
+  .thankyou {
+    text-align: center;
+  }
+
+  .thankyou__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>

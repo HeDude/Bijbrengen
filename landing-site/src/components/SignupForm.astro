@@ -1,0 +1,130 @@
+---
+// Generiek aanmeldformulier-blok: bedt een Google Formulier in op de eigen site.
+// Elke gebruiksplek geeft zijn eigen formUrl (embed-URL met ?embedded=true) en
+// thankYouPath (pad naar een eigen bedankpagina) mee.
+//
+// Na verzenden laadt Google's eigen bevestigingspagina in de iframe. Het script
+// hieronder detecteert die tweede iframe-load en stuurt de bezoeker door naar de
+// meegegeven bedankpagina — die pagina kun je als conversie instellen in
+// Google Ads / Analytics.
+const {
+  id = "aanmelden",
+  eyebrow = "Aanmelden",
+  title = "Aanmelden",
+  description = "Vul het formulier hieronder in.",
+  formUrl,
+  thankYouPath,
+  fallbackSubject = title
+} = Astro.props;
+---
+
+<section id={id} class="signup">
+  <div class="signup__inner">
+    <div class="signup__intro">
+      <span class="page-cta__eyebrow signup__eyebrow">{eyebrow}</span>
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+
+    <div class="signup__embed">
+      <iframe
+        data-google-form-iframe
+        data-thank-you-url={thankYouPath}
+        src={formUrl}
+        title={title}
+        loading="lazy"
+      >
+        Laden…
+      </iframe>
+    </div>
+
+    <p class="signup__fallback">
+      Lukt het invullen niet? Mail dan direct naar
+      <a href={`mailto:info@bijbrengen.nl?subject=${encodeURIComponent(fallbackSubject)}`}>info@bijbrengen.nl</a>.
+    </p>
+  </div>
+</section>
+
+<script is:inline data-astro-rerun>
+  (function () {
+    var iframe = document.querySelector("[data-google-form-iframe]");
+    if (!iframe) return;
+
+    var loadCount = 0;
+    iframe.addEventListener("load", function () {
+      loadCount++;
+      // De eerste 'load' is het formulier zelf; elke volgende 'load' binnen de
+      // iframe is Google's bevestigingspagina na verzenden.
+      if (loadCount > 1) {
+        var thankYouUrl = iframe.getAttribute("data-thank-you-url");
+        if (thankYouUrl) {
+          window.location.href = thankYouUrl;
+        }
+      }
+    });
+  })();
+</script>
+
+<style>
+  .signup {
+    border-top: 1px solid #e5e7eb;
+    background: #ffffff;
+  }
+
+  .signup__inner {
+    max-width: 40rem;
+    margin-inline: auto;
+    padding: 5rem 1.25rem;
+  }
+
+  .signup__intro {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .signup__eyebrow {
+    display: inline-flex;
+    margin-bottom: 0.75rem;
+  }
+
+  .signup__intro h2 {
+    margin: 0;
+    color: #111827;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .signup__intro p {
+    margin: 1rem 0 0;
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .signup__embed {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    background: #fafaf7;
+    overflow: hidden;
+  }
+
+  .signup__embed iframe {
+    display: block;
+    width: 100%;
+    min-height: 45rem;
+    border: 0;
+  }
+
+  .signup__fallback {
+    margin: 1.25rem 0 0;
+    color: #64748b;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .signup__fallback a {
+    color: var(--color-bijbrengen-forest);
+    font-weight: 600;
+  }
+</style>
