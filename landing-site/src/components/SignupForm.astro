@@ -3,10 +3,16 @@
 // Elke gebruiksplek geeft zijn eigen formUrl (embed-URL met ?embedded=true) en
 // thankYouPath (pad naar een eigen bedankpagina) mee.
 //
-// Na verzenden laadt Google's eigen bevestigingspagina in de iframe. Het script
-// hieronder detecteert die tweede iframe-load en stuurt de bezoeker door naar de
-// meegegeven bedankpagina — die pagina kun je als conversie instellen in
-// Google Ads / Analytics.
+// Let op: er is bewust GEEN automatische redirect-na-verzenden. Een eerdere versie
+// telde iframe-'load'-events om verzenden te detecteren, maar Google's eigen
+// cookie-consentscherm (vooral op mobiel) veroorzaakt zelf ook een extra load,
+// waardoor de site soms doorstuurde alsof er verzonden was terwijl de bezoeker
+// nog niets had ingevuld. Omdat de iframe een ander domein is, kunnen we vanuit
+// deze pagina niet betrouwbaar zien wat er in het formulier gebeurt. In plaats
+// daarvan bevestigt de bezoeker zelf met de knop hieronder — dat geeft geen
+// foutieve conversies, wel een (kleine) onderrapportage van wie niet doorklikt.
+// Optioneel: zet dezelfde tekst/link ook in de bevestigingsboodschap van het
+// Google Formulier zelf (Instellingen > Presentatie > Bevestigingsbericht).
 const {
   id = "aanmelden",
   eyebrow = "Aanmelden",
@@ -28,8 +34,6 @@ const {
 
     <div class="signup__embed">
       <iframe
-        data-google-form-iframe
-        data-thank-you-url={thankYouPath}
         src={formUrl}
         title={title}
         loading="lazy"
@@ -38,32 +42,19 @@ const {
       </iframe>
     </div>
 
+    <div class="signup__confirm">
+      <p>Heb je het formulier verzonden?</p>
+      <a href={thankYouPath} class="btn btn--primary">
+        Ja, bevestig mijn aanmelding
+      </a>
+    </div>
+
     <p class="signup__fallback">
       Lukt het invullen niet? Mail dan direct naar
       <a href={`mailto:info@bijbrengen.nl?subject=${encodeURIComponent(fallbackSubject)}`}>info@bijbrengen.nl</a>.
     </p>
   </div>
 </section>
-
-<script is:inline data-astro-rerun>
-  (function () {
-    var iframe = document.querySelector("[data-google-form-iframe]");
-    if (!iframe) return;
-
-    var loadCount = 0;
-    iframe.addEventListener("load", function () {
-      loadCount++;
-      // De eerste 'load' is het formulier zelf; elke volgende 'load' binnen de
-      // iframe is Google's bevestigingspagina na verzenden.
-      if (loadCount > 1) {
-        var thankYouUrl = iframe.getAttribute("data-thank-you-url");
-        if (thankYouUrl) {
-          window.location.href = thankYouUrl;
-        }
-      }
-    });
-  })();
-</script>
 
 <style>
   .signup {
@@ -114,6 +105,27 @@ const {
     width: 100%;
     min-height: 45rem;
     border: 0;
+  }
+
+  .signup__confirm {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    margin: 1.5rem 0 0;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgb(22 101 52 / 0.2);
+    border-radius: 0.75rem;
+    background: #f0fdf4;
+    text-align: center;
+  }
+
+  .signup__confirm p {
+    margin: 0;
+    color: #14532d;
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 
   .signup__fallback {
